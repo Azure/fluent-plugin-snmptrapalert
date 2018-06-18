@@ -11,6 +11,7 @@
 ###                by default all devices has community string set to "public" by default, also useful to avoid unwanted floods of traps                        ###
 ###                from a malicious source ===> default value set is "pubic"                                                                                    ###
 ### trap_format ===> format of the output string                                                                                                                ###
+### Formats the trap into Hash oid: <component>
 ###################################################################################################################################################################
 
 
