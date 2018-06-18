@@ -12,3 +12,49 @@ provided by the bot. You will only need to do this once across all repos using o
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
+
+# fluent-plugin-snmptrapalert
+
+[Fluentd](https://fluentd.org/) input plugin to do something.
+
+TODO: write description for you plugin.
+
+## Installation
+
+### RubyGems
+
+```
+$ gem install fluent-plugin-snmptrapalert
+```
+
+### Bundler
+
+Add following line to your Gemfile:
+
+```ruby
+gem "fluent-plugin-snmptrapalert"
+```
+
+And then execute:
+
+```
+$ bundle
+```
+
+## Configuration
+
+You can generate configuration template:
+
+```
+$ fluent-plugin-config-format input snmptrapalert
+```
+
+You can copy and paste generated documents here.
+
+## Copyright
+
+* Copyright(c) 2018- TODO: Write your name
+* License
+  * Apache License, Version 2.0
+
