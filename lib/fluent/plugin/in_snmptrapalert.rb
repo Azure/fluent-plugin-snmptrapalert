@@ -64,7 +64,7 @@ module Fluent
                         manager.on_trap_default do |trap|
                             tag = @tag
                             timestamp = Engine.now
-                            raise("Unknown Trap Format") unless trap.kind_of?(SNMP::SNMPv1_Trap) or trap.kind_of?(SNMP::SNMPv2_Trap)
+                            raise("Unknown Trap Format", trap) unless trap.kind_of?(SNMP::SNMPv1_Trap) or trap.kind_of?(SNMP::SNMPv2_Trap)
                             trap.each_varbind do |vb|
                                 trap_events[vb.name.to_s] = vb.value.to_s
                             end
