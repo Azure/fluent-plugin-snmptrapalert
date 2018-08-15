@@ -4,8 +4,8 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 Gem::Specification.new do |spec|
   spec.name    = "fluent-plugin-snmptrapalert"
   spec.version = "0.1.0"
-  spec.authors = ["Ajay Ramesh"]
-  spec.email   = ["ajay.rameshcs@gmail.com"]
+  spec.authors = ["Ajay Ramesh", "Gabe de la Mora"]
+  spec.email   = ["ajay.rameshcs@gmail.com", "gadelamo@microsoft.com"]
 
   spec.summary       = "Input plugin for fluentd to recieve SNMP messages "
   spec.description   = spec.summary
