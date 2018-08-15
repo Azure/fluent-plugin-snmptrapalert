@@ -31,9 +31,6 @@ module Fluent
                 config_param :tag, :string, :default => "SNMPTrap.Alert"
                 config_param :host, :string, :default => '0.0.0.0'
                 config_param :port, :integer, :default => 162
-                config_param :community, :string, :default => "public"
-                config_param :trap_format, :string, :default => 'tojson'
-
 
                 #define router method
                 unless method_defined?(:router)
@@ -46,7 +43,6 @@ module Fluent
                     require 'snmp'
                 end
 
-
                 # This method is called before starting.
                 # 'conf' is a Hash that includes configuration parameters.
                 # If the configuration is invalid, raise Fluent::ConfigError.
@@ -58,7 +54,6 @@ module Fluent
                 #Start Listening to SNMP Traps
                 def start
                     super
-                    require 'snmp'
                     trap_events = Hash.new
                     @snmptrap = SNMP::TrapListener.new(:Host => @host, :Port => @port) do |manager|
                         manager.on_trap_default do |trap|
@@ -77,7 +72,6 @@ module Fluent
                         end
                     end
                 end
-
 
                 #To Stop the SNMP Listener and clean up all open connections
                 def shutdown
