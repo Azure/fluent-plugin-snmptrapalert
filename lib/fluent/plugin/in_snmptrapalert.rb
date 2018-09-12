@@ -53,9 +53,9 @@ module Fluent
                 #Start Listening to SNMP Traps
                 def start
                     super
-                    trap_events = Hash.new
                     @snmptrap = SNMP::TrapListener.new(:Host => @host, :Port => @port) do |manager|
                         manager.on_trap_default do |trap|
+                            trap_events = Hash.new
                             tag = @tag
                             timestamp = Engine.now
                             raise("Unknown Trap Format", trap) unless trap.kind_of?(SNMP::SNMPv1_Trap) or trap.kind_of?(SNMP::SNMPv2_Trap)
