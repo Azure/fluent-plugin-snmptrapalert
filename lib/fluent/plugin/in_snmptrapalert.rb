@@ -31,7 +31,7 @@ module Fluent
                 config_param :host, :string, :default => '0.0.0.0'
                 config_param :port, :integer, :default => 162
 
-                # Use this parameters to add extra SMI modules for non-standard SNMP traps
+                # Use these parameters to add extra SMI modules for non-standard SNMP traps
                 # Make sure to set the SMIPATH  environment variable so the smidump tool used to read
                 # the modules can find them.
 
