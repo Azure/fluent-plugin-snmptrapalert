@@ -31,6 +31,17 @@ module Fluent
                 config_param :host, :string, :default => '0.0.0.0'
                 config_param :port, :integer, :default => 162
 
+                # Use this parameters to add extra SMI modules for non-standard SNMP traps
+                # Make sure to set the SMIPATH  environment variable so the smidump tool used to read
+                # the modules can find them.
+
+                # Path in which the smi files are located, usually "#{ENV['SMIPATH']}": /path/to/files
+                config_param :import_path, :string, :default => ""
+                # SMI module filenames: ["smi-apliance.smi"]
+                config_param :import_modules, :array, :default => [], value_type: :string
+                # SMI module names ["SMI-APPLIANCE"]
+                config_param :import_module_names, :array, :default => [], value_type: :string
+
                 #define router method
                 unless method_defined?(:router)
                     define_method(:router) { Engine }
@@ -53,7 +64,26 @@ module Fluent
                 #Start Listening to SNMP Traps
                 def start
                     super
-                    @snmptrap = SNMP::TrapListener.new(:Host => @host, :Port => @port) do |manager|
+                    @manager = SNMP::Manager.new(:host => @host, :port => @port)
+                    if SNMP::MIB.import_supported?
+                        list = SNMP::MIB.list_imported()
+
+                        if import_modules.size > 0
+                            modules=[]
+                            @import_modules.each{|module_name| modules = modules + [module_name]}
+
+                            modules.each{|mod|
+                                SNMP::MIB.import_module([import_path, mod].join('/'))
+                                log.info "Importing MIB definition for: #{mod}."
+                            }
+                        end
+
+                    else
+                        log.warn "Custom MIB not supported"
+                    end
+
+                    modules_to_load = SNMP::Options.default_modules + @import_module_names
+                    @snmptrap = SNMP::TrapListener.new(:Host => @host, :Port => @port, :mib_modules => modules_to_load) do |manager|
                         manager.on_trap_default do |trap|
                             trap_events = Hash.new
                             tag = @tag
