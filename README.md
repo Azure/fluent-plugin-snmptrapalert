@@ -1,3 +1,5 @@
+![Ruby](https://github.com/Azure/fluent-plugin-snmptrapalert/workflows/Ruby/badge.svg)
+
 # Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
@@ -33,10 +35,10 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 ## Testing
 ```
 $ docker run -it --rm -v $PWD:/code ubuntu:16.04 bash
-$ apt-get update && apt-get install -y --no-install-recommends ruby-dev git gcc make libc6-dev smitools &&
-$ cd code &&
-$ gem install bundler:1.14 &&
-$ bundle install --path vendor/bundle &&
+$ apt-get update && apt-get install -y --no-install-recommends ruby-dev git gcc make libc6-dev smitools
+$ cd code
+$ gem install bundler:1.14
+$ bundle install --path vendor/bundle
 $ bundle exec rake test
 ```
 
