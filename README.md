@@ -38,6 +38,7 @@ $ cd code &&
 $ gem install bundler:1.14 &&
 $ bundle install --path vendor/bundle &&
 $ bundle exec rake test
+```
 
 ## Installation
 
