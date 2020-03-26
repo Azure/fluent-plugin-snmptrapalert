@@ -8,7 +8,7 @@ class SnmptrapalertInputTest < Test::Unit::TestCase
 
     SNMP_CONFIG = %[
         host 0.0.0.0
-        port 162
+        port 1620
         tag SNMPTrap.Alert
     ]
 
@@ -17,7 +17,7 @@ class SnmptrapalertInputTest < Test::Unit::TestCase
     end
 
     def send_trap()
-        SNMP::Manager.open(:Host => "127.0.0.1",:Version => :SNMPv1) do |snmp|
+        SNMP::Manager.open(:Host => "127.0.0.1", :Port => 1620, :Version => :SNMPv1) do |snmp|
             snmp.trap_v1(
             "1.3.6.1.4.1.10300.1.1.1.12",
             '172.0.0.1',
