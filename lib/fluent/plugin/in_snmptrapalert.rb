@@ -47,7 +47,7 @@ module Fluent
                     define_method(:router) { Engine }
                 end
 
-                #Define initialize and call buil in ruby snmp module
+                #Define initialize and call built in ruby snmp module
                 def initialize
                     super
                     require 'snmp'
