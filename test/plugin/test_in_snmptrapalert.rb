@@ -48,7 +48,7 @@ class SnmptrapalertInputTest < Test::Unit::TestCase
         end
     end
 
-     test 'emit_mib' do
+    test 'emit_mib' do
         driver = create_driver(SNMP_CONFIG)
         driver.run(expect_emits: 1, timeout: 5) do
             send_trap()
