@@ -12,12 +12,12 @@ class SnmptrapalertInputTest < Test::Unit::TestCase
         tag SNMPTrap.Alert
     ]
 
-    def create_driver(conf=CONFIG)
+    def create_driver(conf=SNMP_CONFIG)
         Fluent::Test::Driver::Input.new(Fluent::Plugin::SnmpTrapAlert).configure(conf)
     end
 
     def send_trap()
-        SNMP::Manager.open(:Host => "127.0.0.1", :Port => 1620, :Version => :SNMPv1) do |snmp|
+        SNMP::Manager.open(:Host => "127.0.0.1", :TrapPort => 1620, :Version => :SNMPv1) do |snmp|
             snmp.trap_v1(
             "1.3.6.1.4.1.10300.1.1.1.12",
             '172.0.0.1',
@@ -35,12 +35,20 @@ class SnmptrapalertInputTest < Test::Unit::TestCase
         assert_equal 'SNMPTrap.Alert', driver.instance.tag
     end
 
+    def test_configure_custom
+        driver = create_driver(SNMP_CONFIG)
+        assert_equal "0.0.0.0", driver.instance.host
+        assert_equal 1620, driver.instance.port
+        assert_equal 'SNMPTrap.Alert', driver.instance.tag
+    end
+
     test 'emit' do
         driver = create_driver(SNMP_CONFIG)
         driver.run(expect_emits: 1, timeout: 5) do
             send_trap()
         end
 
+        assert_equal(driver.events.length(), 1)
         driver.events.each do |tag, timestamp, trap_events|
             assert_equal("SNMPTrap.Alert", tag)
             assert_true(timestamp.is_a?(Fluent::EventTime))
@@ -53,6 +61,8 @@ class SnmptrapalertInputTest < Test::Unit::TestCase
         driver.run(expect_emits: 1, timeout: 5) do
             send_trap()
         end
+
+        assert_equal(driver.events.length(), 1)
         driver.events.each do |tag, timestamp, trap_events|
             assert_equal 'SNMPTrap.Alert', tag
             assert_true timestamp.is_a?(Fluent::EventTime)
