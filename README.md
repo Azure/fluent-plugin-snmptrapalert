@@ -1,3 +1,5 @@
+![Ruby](https://github.com/Azure/fluent-plugin-snmptrapalert/workflows/Ruby/badge.svg)
+
 # Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
