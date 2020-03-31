@@ -95,7 +95,7 @@ module Fluent
                             trap_events['host'] = trap.source_ip
                             if trap.kind_of?(SNMP::SNMPv1_Trap)
                                 trap_events['specific_trap'] = trap.specific_trap
-                                trap_events['enterprise'] = trap.enterprise          
+                                trap_events['enterprise'] = trap.enterprise
                             end
                             if @trap_format == 'tojson'
                                require 'json'
