@@ -61,7 +61,7 @@ class SnmptrapalertInputTest < Test::Unit::TestCase
         driver.events.each do |tag, timestamp, trap_events|
             assert_equal("SNMPTrap.Alert", tag)
             assert_true(timestamp.is_a?(Fluent::EventTime))
-            assert_equal(trap_events, {"SNMPv2-SMI::mgmt.3.4"=>"1", "enterprise"=>[1,3,6,1,4,1,10300,1,1,1,12],"generic_trap"=>:enterpriseSpecific, "host"=>"127.0.0.1", "specific_trap"=>0})
+            assert_equal(trap_events, {"SNMPv2-SMI::mgmt.3.4"=>"1", "enterprise"=>[1,3,6,1,4,1,10300,1,1,1,12],"generic_trap"=>:enterpriseSpecific, "host"=>"127.0.0.1", "specific_trap"=>0, "agent_addr"=>"172.0.0.1"})
         end
     end
 
@@ -80,7 +80,7 @@ class SnmptrapalertInputTest < Test::Unit::TestCase
             assert_match(/(?:(SNMPv2-(\w+)(::)(\w+)((\.)(\d+)){1,13}(=>))|(host=>))/, message)
 
             trap_events.each do |key, value|
-                assert_match(/(?:(SNMPv2-(\w+)(::)(\w+)((\.)(\d+)){1,13})|(host)|(specific_trap)|(enterprise)|(generic_trap))/, key.to_s, "Unknown OID format")
+                assert_match(/(?:(SNMPv2-(\w+)(::)(\w+)((\.)(\d+)){1,13})|(host)|(specific_trap)|(enterprise)|(generic_trap)|(agent_addr))/, key.to_s, "Unknown OID format")
             end
         end
     end

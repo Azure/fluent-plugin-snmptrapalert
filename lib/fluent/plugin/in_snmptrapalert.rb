@@ -97,6 +97,7 @@ module Fluent
                                 trap_events['specific_trap'] = trap.specific_trap
                                 trap_events['enterprise'] = trap.enterprise
                                 trap_events['generic_trap'] = trap.generic_trap
+                                trap_events['agent_addr'] = trap.agent_addr.to_s
                             end
                             if @trap_format == 'tojson'
                                require 'json'
