@@ -38,7 +38,8 @@ $ docker run -it --rm -v $PWD:/code ubuntu:16.04 bash
 $ apt-get update && apt-get install -y --no-install-recommends ruby-dev git gcc make libc6-dev smitools
 $ cd code
 $ gem install bundler:2.2.10
-$ bundle install --path vendor/bundle
+$ bundle config set --local path 'vendor/bundle'
+$ bundle install
 $ bundle exec rake test
 ```
 
