@@ -21,6 +21,6 @@ jobs:
         ruby-version: 2.6.x
     - name: Build and test with Rake
       run: |
-        gem install bundler:1.14
+        gem install bundler:2.2.10
         bundle install --jobs 4 --retry 3 --path vendor/bundle
         bundle exec rake test
